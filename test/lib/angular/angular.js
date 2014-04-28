@@ -4666,8 +4666,8 @@ function $CacheFactoryProvider() {
  * Adding via the $templateCache service:
  * 
  * <pre>
- * var myApp = angular.module('myApp', []);
- * myApp.run(function($templateCache) {
+ * var pocketMon = angular.module('pocketMon', []);
+ * pocketMon.run(function($templateCache) {
  *   $templateCache.put('templateId.html', 'This is the content of the template');
  * });
  * </pre>
@@ -12460,7 +12460,7 @@ function adjustMatchers(matchers) {
  * Here is what a secure configuration for this scenario might look like:
  *
  * <pre class="prettyprint">
- *    angular.module('myApp', []).config(function($sceDelegateProvider) {
+ *    angular.module('pocketMon', []).config(function($sceDelegateProvider) {
  *      $sceDelegateProvider.resourceUrlWhitelist([
  *        // Allow same origin resource loads.
  *        'self',
