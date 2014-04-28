@@ -1,9 +1,4 @@
 
-<<<<<<< HEAD
- 
-=======
-
->>>>>>> 5271a1b7d64d41c0f44551195e94a2bb4966ddb9
 ##Rough Data Model
 	Transactions
 		TransactionX
