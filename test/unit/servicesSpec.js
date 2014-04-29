@@ -5,6 +5,34 @@
 describe('service', function() {
    beforeEach(module('pocketMon.services'));
 
+   describe('transactionService', function() {
+      beforeEach(module(function($provide) {
+         // mock dependencies used by our services to isolate testing
+         $provide.value('Firebase', firebaseStub());
+         $provide.value('$location', stub('path'));
+         $provide.value('firebaseRef', firebaseStub());
+      }));
+
+      // set up some test data on the one shared instance
+      var transactionService; 
+      beforeEach(inject(function(_transactionService_) {
+         transactionService = _transactionService_;
+         transactionService.init();
+      }));
+
+      describe('get', function() {
+         it('should return all transactions for the given accountId',
+            inject(function($timeout) {
+               var tmp = transactionService.get();
+               expect(tmp).toBe("test");
+            })
+         );
+      });
+   });
+
+
+   //------------------------ end of my services start of seed services
+
    describe('loginService', function() {
       beforeEach(module(function($provide) {
          // mock dependencies used by our services to isolate testing
