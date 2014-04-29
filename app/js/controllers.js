@@ -4,24 +4,26 @@
 
 angular.module('pocketMon.controllers', [])
    .controller('HomeCtrl', ['$scope', 'syncData', function($scope, syncData) {
-      syncData('syncedValue').$bind($scope, 'syncedValue');
+      //syncData('syncedValue').$bind($scope, 'syncedValue');
    }])
 
-  .controller('ChatCtrl', ['$scope', 'syncData', function($scope, syncData) {
-      $scope.newMessage = null;
 
-      // constrain number of messages by limit into syncData
-      // add the array into $scope.messages
-      $scope.messages = syncData('messages', 10);
+   // keep as example code for now
+  // .controller('ChatCtrl', ['$scope', 'syncData', function($scope, syncData) {
+  //     $scope.newMessage = null;
 
-      // add new messages to the list
-      $scope.addMessage = function() {
-         if( $scope.newMessage ) {
-            $scope.messages.$add({text: $scope.newMessage});
-            $scope.newMessage = null;
-         }
-      };
-   }])
+  //     // constrain number of messages by limit into syncData
+  //     // add the array into $scope.messages
+  //     $scope.messages = syncData('messages', 10);
+
+  //     // add new messages to the list
+  //     $scope.addMessage = function() {
+  //        if( $scope.newMessage ) {
+  //           $scope.messages.$add({text: $scope.newMessage});
+  //           $scope.newMessage = null;
+  //        }
+  //     };
+  //  }])
 
    .controller('LoginCtrl', ['$scope', 'loginService', '$location', function($scope, loginService, $location) {
       $scope.email = null;

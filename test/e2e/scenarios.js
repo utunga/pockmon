@@ -13,7 +13,7 @@ angular.scenario.dsl('angularFireLogout', function() {
    }
 });
 
-describe('my app', function() {
+describe('pocketMon app', function() {
 
   beforeEach(function() {
      browser().navigateTo('../../app/index.html');
@@ -27,7 +27,6 @@ describe('my app', function() {
     expect(browser().location().url()).toBe("/home");
   });
 
-
   describe('home', function() {
 
     beforeEach(function() {
@@ -40,18 +39,6 @@ describe('my app', function() {
         toMatch(/Home/);
     });
 
-  });
-
-
-  describe('chat', function() {
-     beforeEach(function() {
-        browser().navigateTo('#/chat');
-     });
-
-     it('should render chat when user navigates to /chat', function() {
-        expect(element('[ng-view] h2:first').text()).
-           toMatch(/Chat/);
-     });
   });
 
    describe('account', function() {
