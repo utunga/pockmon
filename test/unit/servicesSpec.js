@@ -18,16 +18,36 @@ describe('service', function() {
       beforeEach(inject(function(_transactionService_) {
          transactionService = _transactionService_;
          transactionService.init();
+         
+         //FIXME ought to set up test data directly on the firebaseRef fake
+         transactionService.addTransaction({
+                  Amt : 10,
+                  Type : Types.ALLOWANCE,
+                  AccountId: 1
+               });
+            
+         transactionService.addTransaction({
+                  Amt : 12,
+                  Type : Types.ALLOWANCE,
+                  AccountId: 2
+               });
+
+         transactionService.addTransaction({
+                  Amt : -2,
+                  Type : Types.DEBIT,
+                  AccountId: 1
+               });
+
       }));
 
-      describe('get', function() {
-         it('should return all transactions for the given accountId',
-            inject(function($timeout) {
-               var tmp = transactionService.get();
-               expect(tmp).toBe("test");
-            })
-         );
-      });
+      it('should return transactions for the given accountId',
+         inject(function($timeout) {
+            var tmp = transactionService.forAccount(2);
+            //expect(tmp.length).toBe(2);
+            //flush($timeout);
+         })
+      );
+   
    });
 
 

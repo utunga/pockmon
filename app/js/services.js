@@ -1,3 +1,11 @@
+function fullDump(obj) {
+	for (var id in obj) {
+      if (typeof(obj[id]) == "function") {
+        dump(id + ": " + obj[id].toString());
+      }
+    } 
+}
+
 (function() {
    'use strict';
 
@@ -7,17 +15,23 @@
 
       	// add/remove/get transactions
 		.factory('transactionService', ['$rootScope', 'firebaseRef', function($rootScope, firebaseRef) {
-			var auth = null;
 			return {
 				init: function() {
-				   return auth = "test";
+				   $rootScope.transactions = firebaseRef('transactions');
 				},
 
-				get: function() {
-				   return auth;
+				addTransaction: function(transaction) {
+					fullDump($rootScope.transactions);
+					$rootScope.transactions; //.push(transaction);
+				},
+
+				forAccount: function(accountId) {
+					return $rootScope.transactions;
 				}
 			}
 		}])
+
+      	
 
 })();
 
