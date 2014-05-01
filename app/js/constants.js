@@ -1,5 +1,7 @@
 var Types = {
-	CREDIT:1,
-	DEBIT:2,
-	ALLOWANCE:3
+	CREDIT:"C",
+	DEBIT:"D",
+	ALLOWANCE:"A"
 }
+
+var FBURL = "https://scorching-fire-817.firebaseio.com";

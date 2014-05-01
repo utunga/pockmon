@@ -6,9 +6,17 @@ angular.module('pocketMon',
          'simpleLoginTools', 'routeSecurity']
    )
 
-   .run(['loginService', '$rootScope', 'FBURL', function(loginService, $rootScope, FBURL) {
+   .run(['loginService', '$rootScope', function(loginService, $rootScope) {
       // establish authentication
       $rootScope.auth = loginService.init('/login');
       $rootScope.FBURL = FBURL;
    
    }]);
+
+function fullDump(obj) {
+	for (var id in obj) {
+      if (typeof(obj[id]) == "function") {
+        dump(id + ": " + obj[id].toString());
+      }
+    } 
+}

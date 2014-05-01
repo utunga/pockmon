@@ -1,11 +1,3 @@
-function fullDump(obj) {
-	for (var id in obj) {
-      if (typeof(obj[id]) == "function") {
-        dump(id + ": " + obj[id].toString());
-      }
-    } 
-}
-
 (function() {
    'use strict';
 
@@ -14,19 +6,32 @@ function fullDump(obj) {
    angular.module('pocketMon.services', ['pocketMon.service.login', 'pocketMon.service.firebase', 'pocketMon.service.changeEmail'])
 
       	// add/remove/get transactions
-		.factory('transactionService', ['$rootScope', 'firebaseRef', function($rootScope, firebaseRef) {
+		.factory('transactionService', ['$rootScope', '$firebase', 'firebaseRef', function($rootScope, $firebase, firebaseRef) {
+			var transactions;
+			var ref ;
 			return {
 				init: function() {
-				   $rootScope.transactions = firebaseRef('transactions');
+					ref = firebaseRef('transactions')
+					transactions = $firebase(ref);
+					
 				},
 
 				addTransaction: function(transaction) {
-					fullDump($rootScope.transactions);
-					$rootScope.transactions; //.push(transaction);
+					ref.push(transaction);
 				},
 
 				forAccount: function(accountId) {
-					return $rootScope.transactions;
+					var result = [];
+					ref.on("child_added", function(snapshot) {
+						var trans = snapshot.val();
+						// actually it would be better to 
+						// store transactions under their own key 
+						if (trans.AccountId === accountId)
+							result.push(snapshot.val());
+					});
+					//FIXME1 how can we be sure the above has returned 
+					// should use a promise in some way here
+					return result;
 				}
 			}
 		}])

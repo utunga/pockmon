@@ -7,10 +7,13 @@ describe('service', function() {
 
    describe('transactionService', function() {
       beforeEach(module(function($provide) {
-         // mock dependencies used by our services to isolate testing
-         $provide.value('Firebase', firebaseStub());
-         $provide.value('$location', stub('path'));
-         $provide.value('firebaseRef', firebaseStub());
+         // in the case of testing of this service we dont
+         // mock Firebase because the whole point of this service
+         // is to wrap interactions with Firebase
+         //$provide.value('Firebase', firebaseStub());
+         //$provide.value('$location', stub('path'));
+         //$provide.value('firebaseRef', firebaseStub());
+
       }));
 
       // set up some test data on the one shared instance
@@ -42,8 +45,8 @@ describe('service', function() {
 
       it('should return transactions for the given accountId',
          inject(function($timeout) {
-            var tmp = transactionService.forAccount(2);
-            //expect(tmp.length).toBe(2);
+            var tmp = transactionService.forAccount(1);
+            expect(tmp.length).toBe(2);
             //flush($timeout);
          })
       );

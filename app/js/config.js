@@ -9,10 +9,6 @@ angular.module('pocketMon.config', [])
 
    // where to redirect users if they need to authenticate (see module.routeSecurity)
    .constant('loginRedirectPath', '/login')
-
-   // your Firebase URL goes here
-   .constant('FBURL', 'https://scorching-fire-817.firebaseio.com');
-
    //you can use this one to try out a demo of the seed
 //   .constant('FBURL', 'https://angularfire-seed.firebaseio.com');
 
