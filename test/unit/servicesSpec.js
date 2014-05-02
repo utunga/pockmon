@@ -23,22 +23,23 @@ describe('service', function() {
          transactionService.init();
          
          //FIXME ought to set up test data directly on the firebaseRef fake
+         transactionService.clearAllData();
          transactionService.addTransaction({
-                  Amt : 10,
-                  Type : Types.ALLOWANCE,
-                  AccountId: 1
-               });
+                  amt : 10,
+                  type : Types.ALLOWANCE,
+                  accountId: 1
+               }); 
             
          transactionService.addTransaction({
-                  Amt : 12,
-                  Type : Types.ALLOWANCE,
-                  AccountId: 2
+                  amt : 12,
+                  type : Types.ALLOWANCE,
+                  accountId: 2
                });
 
          transactionService.addTransaction({
-                  Amt : -2,
-                  Type : Types.DEBIT,
-                  AccountId: 1
+                  amt : -2,
+                  type : Types.DEBIT,
+                  accountId: 1
                });
 
       }));
@@ -47,6 +48,14 @@ describe('service', function() {
          inject(function($timeout) {
             var tmp = transactionService.forAccount(1);
             expect(tmp.length).toBe(2);
+            //flush($timeout);
+         })
+      );
+
+      it('should give you a correct balance given an accountId',
+         inject(function($timeout) {
+            var balance = transactionService.balanceForAccount(1);
+            expect(balance).toBe(8);
             //flush($timeout);
          })
       );

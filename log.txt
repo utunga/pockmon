@@ -3,3 +3,4 @@
 2014-04-29 Remove some bits, add transactionService and some tests
 2014-04-30 Frustration dealing with meta bullshit unit tests crap, basically
 2014-05-01 Wow that was hard work. Managed to force firebase to comply eventually but argh a pain in the half 
+2014-05-02 Insanely, insanely tired. Rather than having a missing X learn the lesson here buddy. Anyway got balance checking to work.

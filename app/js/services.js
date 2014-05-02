@@ -13,25 +13,41 @@
 				init: function() {
 					ref = firebaseRef('transactions')
 					transactions = $firebase(ref);
-					
+				},
+
+				clearAllData: function() {
+					ref.set(null);
 				},
 
 				addTransaction: function(transaction) {
-					ref.push(transaction);
+					if (!(transaction.accountId))
+						throw "Can't save a transaction without an accountId";
+					//retrieve appropriate ledger
+					var ledger = ref.child(transaction.accountId)
+					ledger.push(transaction);
 				},
 
 				forAccount: function(accountId) {
 					var result = [];
-					ref.on("child_added", function(snapshot) {
+					var ledger = ref.child(accountId)
+					ledger.on("child_added", function(snapshot) {
 						var trans = snapshot.val();
-						// actually it would be better to 
-						// store transactions under their own key 
-						if (trans.AccountId === accountId)
-							result.push(snapshot.val());
+						result.push(snapshot.val());
 					});
 					//FIXME1 how can we be sure the above has returned 
 					// should use a promise in some way here
 					return result;
+				},
+
+				balanceForAccount: function(accountId) {
+					//FIXME should use some sort of js map function reallly
+					var balance = 0;
+					var ledger = ref.child(accountId)
+					ledger.on("child_added", function(snapshot) {
+						var transaction = snapshot.val();
+						balance = balance + transaction.amt;
+					});
+					return balance;
 				}
 			}
 		}])
