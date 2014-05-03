@@ -59,6 +59,19 @@ describe('service', function() {
             //flush($timeout);
          })
       );
+
+      it('should have a transaction id after being added',
+         inject(function($timeout) {
+            var transaction = {
+               amt : -2,
+               type : Types.DEBIT,
+               accountId: 1
+            }
+            transactionService.addTransaction(transaction)
+            .then(dump(transaction));//expect(transaction.id).toBeDefined());
+            //flush($timeout);
+         })
+      );
    
    });
 

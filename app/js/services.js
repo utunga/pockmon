@@ -1,35 +1,38 @@
 (function() {
    'use strict';
 
-   /* Services */
+    /* Services */
 
-   angular.module('pocketMon.services', ['pocketMon.service.login', 'pocketMon.service.firebase', 'pocketMon.service.changeEmail'])
+    angular.module('pocketMon.services', ['pocketMon.service.login', 'pocketMon.service.firebase', 'pocketMon.service.changeEmail'])
 
       	// add/remove/get transactions
 		.factory('transactionService', ['$rootScope', '$firebase', 'firebaseRef', function($rootScope, $firebase, firebaseRef) {
-			var transactions;
-			var ref ;
+			var fbTransacts ;
 			return {
 				init: function() {
-					ref = firebaseRef('transactions')
-					transactions = $firebase(ref);
+					fbTransacts = firebaseRef('transactions')
 				},
 
 				clearAllData: function() {
-					ref.set(null);
+					fbTransacts.set(null);
 				},
 
 				addTransaction: function(transaction) {
 					if (!(transaction.accountId))
 						throw "Can't save a transaction without an accountId";
 					//retrieve appropriate ledger
-					var ledger = ref.child(transaction.accountId)
-					ledger.push(transaction);
+					var $ledger = $firebase(fbTransacts.child(transaction.accountId));
+					return $ledger.$add(transaction)
+					.then(function(ref) {
+						// get the id of the added transaction and store it
+						transaction.id = ref.name(); 
+						dump(ref.name());
+					});
 				},
 
 				forAccount: function(accountId) {
 					var result = [];
-					var ledger = ref.child(accountId)
+					var ledger = fbTransacts.child(accountId)
 					ledger.on("child_added", function(snapshot) {
 						var trans = snapshot.val();
 						result.push(snapshot.val());
@@ -42,7 +45,7 @@
 				balanceForAccount: function(accountId) {
 					//FIXME should use some sort of js map function reallly
 					var balance = 0;
-					var ledger = ref.child(accountId)
+					var ledger = fbTransacts.child(accountId)
 					ledger.on("child_added", function(snapshot) {
 						var transaction = snapshot.val();
 						balance = balance + transaction.amt;
@@ -52,7 +55,11 @@
 			}
 		}])
 
-      	
+      	// add/remove/get kids
+		.factory('kidService', ['$rootScope', '$firebase', 'firebaseRef', function($rootScope, $firebase, firebaseRef) {
+			var transactions;
+			var ref ;
+		}]);
 
 })();
 

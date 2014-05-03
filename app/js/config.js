@@ -7,6 +7,7 @@ angular.module('pocketMon.config', [])
    // see tags for other versions: https://github.com/firebase/angularFire-seed/tags
    .constant('version', '0.6')
 
+   .constant("FBURL", "https://scorching-fire-817.firebaseio.com")
    // where to redirect users if they need to authenticate (see module.routeSecurity)
    .constant('loginRedirectPath', '/login')
    //you can use this one to try out a demo of the seed

@@ -1,20 +1,19 @@
 
 ##Rough Data Model
 	Transactions
-		TransactionX
-			Amt
-			When
-			Type   
-			AccountId
-			Note
-	AllowanceX
-		AmountPer
-		Period
+		AccountId
+			TransactionX
+				Amt
+				When
+				Type   
+				Note
 	Accounts
 		ChildX
 			Name
 			Pic
-			AllowanceId
+			Allowance
+				AmountPer
+				Period
 			AllowanceLastUpdated
 
 ####Calculated at runtime (on demand)
