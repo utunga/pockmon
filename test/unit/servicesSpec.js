@@ -7,40 +7,53 @@ describe('service', function() {
 
    describe('transactionService', function() {
       beforeEach(module(function($provide) {
-         // in the case of testing of this service we dont
+
+         // for some reason the seed example uses this
+         // but this just flat out doesn't work..
+         //// mock dependencies used by our services to isolate testing
+         // $provide.value('Firebase', firebaseStub());
+         // $provide.value('$location', stub('path'));
+         // $provide.value('firebaseRef', firebaseStub());
+
+         // so in the case of testing of this service we dont
          // mock Firebase because the whole point of this service
          // is to wrap interactions with Firebase
-         //$provide.value('Firebase', firebaseStub());
-         //$provide.value('$location', stub('path'));
-         //$provide.value('firebaseRef', firebaseStub());
+        $provide.value('FBURL', "https://scorching-fire-test8.firebaseio.com");
 
       }));
 
-      // set up some test data on the one shared instance
       var transactionService; 
       beforeEach(inject(function(_transactionService_) {
-         transactionService = _transactionService_;
-         transactionService.init();
-         
-         //FIXME ought to set up test data directly on the firebaseRef fake
-         transactionService.clearAllData();
-         transactionService.addTransaction({
-                  amt : 10,
-                  type : Types.ALLOWANCE,
-                  accountId: 1
-               }); 
+     
+         // set up some test data on the one shared instance
+         // but only do this once per test run
+         if (!transactionService) { 
             
-         transactionService.addTransaction({
-                  amt : 12,
-                  type : Types.ALLOWANCE,
-                  accountId: 2
-               });
+            // get transactionService from injection
+            transactionService = _transactionService_;
 
-         transactionService.addTransaction({
-                  amt : -2,
-                  type : Types.DEBIT,
-                  accountId: 1
-               });
+            // set its path to include 'test' as a prefix   
+            transactionService.setTestMode();
+            
+            //FIXME ought to set up test data directly on the firebaseRef fake
+            transactionService.addTransaction({
+                     amt : 10,
+                     type : Types.ALLOWANCE,
+                     accountId: 1
+                  }); 
+               
+            transactionService.addTransaction({
+                     amt : 12,
+                     type : Types.ALLOWANCE,
+                     accountId: 2
+                  });
+
+            transactionService.addTransaction({
+                     amt : -2,
+                     type : Types.DEBIT,
+                     accountId: 1
+                  });
+         }
 
       }));
 
@@ -68,8 +81,16 @@ describe('service', function() {
                accountId: 1
             }
             transactionService.addTransaction(transaction)
-            .then(dump(transaction));//expect(transaction.id).toBeDefined());
-            //flush($timeout);
+            //.then(flush($timeout))
+             // .then(function(res) {console.log(res);})
+            .then(function(res) {console.log("here2")});
+               
+               // function() {
+               //   console.log(transaction);
+               //   expect(transaction.id).toBeDefined();
+               // }
+            flush($timeout);
+            console.log("here");
          })
       );
    

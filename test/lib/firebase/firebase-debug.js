@@ -110,7 +110,7 @@ goog.require = function(name) {
 };
 goog.basePath = "";
 goog.global.CLOSURE_BASE_PATH;
-goog.global.CLOSURE_NO_DEPS;
+goog.global.CLOSURE_NO_DEPS = true;
 goog.global.CLOSURE_IMPORT_SCRIPT;
 goog.nullFunction = function() {
 };
