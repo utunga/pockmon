@@ -4,4 +4,5 @@
 2014-04-30 Frustration dealing with meta bullshit unit tests crap, basically
 2014-05-01 Wow that was hard work. Managed to force firebase to comply eventually but argh a pain in the half 
 2014-05-02 Insanely, insanely tired. Rather than having a missing X learn the lesson here buddy. Anyway got balance checking to work.
-2014-05-03 Bit frustrating working with promises, specifically the way angularfire (as opposed to angular library) never resolves any of its promises.. wtf? also firebaseio.com looks like its down gr
+2014-05-03 Bit frustrating working with promises, specifically the way angularfire (as opposed to angular library) never resolves any of its promises.. wtf? also firebaseio.com looks like its down grrr
+2014-05-04 More frustration with hassles of wrapping angulareFire in a service but at least I posted a question about it.. so hope that will learn me something
