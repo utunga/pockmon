@@ -9,11 +9,16 @@
 		.factory('transactionService', ['$rootScope', '$firebase', 'firebaseRef', function($rootScope, $firebase, firebaseRef) {
 			var fbTransacts ;
 			return {
-				init: function() {
+				_init: function() {
 					fbTransacts = firebaseRef('transactions')
+					return this;
 				},
 
-				clearAllData: function() {
+				setTestMode: function() {
+					fbTransacts = firebaseRef('test', 'transactions')
+				},
+
+				test_clearAllData: function() {
 					fbTransacts.set(null);
 				},
 
@@ -21,13 +26,23 @@
 					if (!(transaction.accountId))
 						throw "Can't save a transaction without an accountId";
 					//retrieve appropriate ledger
-					var $ledger = $firebase(fbTransacts.child(transaction.accountId));
-					return $ledger.$add(transaction)
-					.then(function(ref) {
-						// get the id of the added transaction and store it
-						transaction.id = ref.name(); 
-						dump(ref.name());
-					});
+					var ledger = fbTransacts.child(transaction.accountId);
+					
+					// wrap it in an angularFire thingo
+					var $ledger = $firebase(ledger);
+					// add the transaction
+					return $ledger.$add(transaction) // this actually works
+						.then(function(ref) {
+							// but this next line never gets called!!
+							console.log("got to here"); 
+							// .. so this never happens..
+							// get the id of the added transaction 
+							transaction.id = ref.name(); 
+						});
+
+					// this doesn't work either, sadly not sure why
+					//ledger.push(trasaction);
+
 				},
 
 				forAccount: function(accountId) {
@@ -52,7 +67,7 @@
 					});
 					return balance;
 				}
-			}
+			}._init();
 		}])
 
       	// add/remove/get kids

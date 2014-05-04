@@ -2,7 +2,7 @@
 angular.module('pocketMon.service.firebase', ['firebase'])
 
 // a simple utility to create references to Firebase paths
-   .factory('firebaseRef', ['Firebase', function(Firebase) {
+   .factory('firebaseRef', ['Firebase', 'FBURL', function(Firebase, FBURL) {
       /**
        * @function
        * @name firebaseRef

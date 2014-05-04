@@ -4,4 +4,3 @@ var Types = {
 	ALLOWANCE:"A"
 }
 
-var FBURL = "https://scorching-fire-817.firebaseio.com";
