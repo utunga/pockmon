@@ -18,17 +18,19 @@ describe('service', function() {
          // so in the case of testing of this service we dont
          // mock Firebase because the whole point of this service
          // is to wrap interactions with Firebase
-        $provide.value('FBURL', "https://scorching-fire-test8.firebaseio.com");
+         $provide.value('FBURL', "https://scorching-fire-test8.firebaseio.com");
 
       }));
 
       var transactionService; 
       beforeEach(inject(function(_transactionService_) {
      
+
          // set up some test data on the one shared instance
          // but only do this once per test run
          if (!transactionService) { 
             
+           
             // get transactionService from injection
             transactionService = _transactionService_;
 
@@ -73,27 +75,6 @@ describe('service', function() {
          })
       );
 
-      it('should have a transaction id after being added',
-         inject(function($timeout) {
-            var transaction = {
-               amt : -2,
-               type : Types.DEBIT,
-               accountId: 1
-            }
-            transactionService.addTransaction(transaction)
-            //.then(flush($timeout))
-             // .then(function(res) {console.log(res);})
-            .then(function(res) {console.log("here2")});
-               
-               // function() {
-               //   console.log(transaction);
-               //   expect(transaction.id).toBeDefined();
-               // }
-            flush($timeout);
-            console.log("here");
-         })
-      );
-   
    });
 
 

@@ -6,3 +6,8 @@
 2014-05-02 Insanely, insanely tired. Rather than having a missing X learn the lesson here buddy. Anyway got balance checking to work.
 2014-05-03 Bit frustrating working with promises, specifically the way angularfire (as opposed to angular library) never resolves any of its promises.. wtf? also firebaseio.com looks like its down grrr
 2014-05-04 More frustration with hassles of wrapping angulareFire in a service but at least I posted a question about it.. so hope that will learn me something
+2014-05-05 Tiny bit of pocketmoney app but mostly setting up trustwalla for hosting in gh-pages
+2014-05-06 Mockups for POP app https://popapp.in/ 
+2014-05-07 Tidying up http://trustwalla.com
+2014-05-08 
+2014-05-09 Insanity can't to be honest figure out what is up with why $firebase.$add works but firebaseRef.push just totally doesnt.. do i need to add a $timeout in the tests? change the API to return promises?
