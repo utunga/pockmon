@@ -11,3 +11,12 @@
 2014-05-07 Tidying up http://trustwalla.com
 2014-05-08 
 2014-05-09 Insanity can't to be honest figure out what is up with why $firebase.$add works but firebaseRef.push just totally doesnt.. do i need to add a $timeout in the tests? change the API to return promises?
+2014-05-10 
+2014-05-11
+2014-05-12 Pushed new version of trustwalla.com - fixes for ie and mobile.. just in time
+2014-05-13 Mockups for pockmon using 'POP'
+2014-05-14 More futzing around trying to get pockmon something, i forget.
+2014-05-15 
+2014-05-16 POP mockup
+2014-05-17 
+2014-04-18 Blog post
